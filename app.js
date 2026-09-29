@@ -1,19 +1,66 @@
-const themes=[
- {day:'MONDAY / 01',name:'DOMINION STATE',copy:'Power, ownership, arrival. Own the room. Enter like the timeline owes you rent.',accent:'#6d28d9',motif:'Weight bars',motion:'stamp',art:'days/mon.jpg'},
- {day:'TUESDAY / 02',name:'NO FILTER ENERGY',copy:'Uncensored, raw, loud. Say it with your chest. The internet has receipts.',accent:'#ff3b30',motif:'Receipt strike',motion:'strike',art:'days/tue.jpg'},
- {day:'WEDNESDAY / 03',name:'SHE MOVES DIFFERENT',copy:'Feminine power, elegance, motion. She does not chase the moment. She becomes it.',accent:'#ff4fd8',motif:'Motion ribbon',motion:'ribbon',art:'days/wed.jpg'},
- {day:'THURSDAY / 04',name:'ECHO ERA',copy:'Sound, influence, repetition, virality. One post. Ten thousand echoes.',accent:'#2f80ed',motif:'Echo trails',motion:'echo',art:'days/thu.jpg'},
- {day:'FRIDAY / 05',name:'PLAY YOUR VIBE',copy:'Games, expression, community competition. Pick your vibe. Play like you have receipts.',accent:'#22c55e',motif:'Score strips',motion:'bounce',art:'days/fri.jpg'},
- {day:'SATURDAY / 06',name:'READ BETWEEN THE LINES',copy:'Subtext, screenshots, quotes, hidden meaning. The vibe said another.',accent:'#f7f3e8',motif:'Redaction bars',motion:'wipe',art:'days/sat.jpg'},
- {day:'SUNDAY / 07',name:'CHAOS CULTURE',copy:'Final boss energy. Maximum badge stack. Controlled chaos, unfiltered culture.',accent:'#ff7a00',motif:'Offset stamp',motion:'shake',art:'days/sun.jpg'}
+const CORE = { primary: '#F5C400', background: '#0B0B0B', surface: '#171717', surface2: '#252525', text: '#F7F3E8', muted: '#C9C3B5' };
+
+export const DAYS = [
+  { day: 'Monday', name: 'DOMINION STATE', accent: '#6D28D9', secondaryAccent: '#F5C400', motif: 'crown / stamp', mood: 'Power, ownership, arrival.', energy: 'Commanding', description: 'Own the room. Enter like the timeline owes you rent.', motionPreset: 'stamp' },
+  { day: 'Tuesday', name: 'NO FILTER ENERGY', accent: '#FF3B30', secondaryAccent: '#F5C400', motif: 'receipt / strike', mood: 'Uncensored, raw, loud.', energy: 'Unfiltered', description: 'Say it with your chest. The internet has receipts.', motionPreset: 'strike' },
+  { day: 'Wednesday', name: 'SHE MOVES DIFFERENT', accent: '#FF4FD8', secondaryAccent: '#F7F3E8', motif: 'motion ribbons', mood: 'Feminine power, elegance, motion.', energy: 'Fluid', description: 'She does not chase the moment. She becomes it.', motionPreset: 'ribbon' },
+  { day: 'Thursday', name: 'ECHO ERA', accent: '#2F80ED', secondaryAccent: '#F5C400', motif: 'echo trails', mood: 'Sound, influence, repetition, virality.', energy: 'Amplified', description: 'One post. Ten thousand echoes.', motionPreset: 'echo' },
+  { day: 'Friday', name: 'PLAY YOUR VIBE', accent: '#22C55E', secondaryAccent: '#F5C400', motif: 'score strips', mood: 'Games, expression, community competition.', energy: 'Playful', description: 'Pick your vibe. Play like you have receipts.', motionPreset: 'bounce' },
+  { day: 'Saturday', name: 'READ BETWEEN THE LINES', accent: '#F7F3E8', secondaryAccent: '#F5C400', motif: 'redaction bars', mood: 'Subtext, screenshots, quotes, hidden meaning.', energy: 'Observant', description: 'The text said one thing. The vibe said another.', motionPreset: 'wipe' },
+  { day: 'Sunday', name: 'CHAOS CULTURE', accent: '#FF7A00', secondaryAccent: '#F5C400', motif: 'offset badge / chaos marks', mood: 'Final boss energy, full community madness.', energy: 'Uncontainable', description: 'Controlled chaos. Unfiltered culture. BIG CRUISE〽️', motionPreset: 'shake' }
 ];
-const assets=[
- ['Primary wordmark','logos','PNG','logos/wordmark.png','BIG CRUISE〽️ wordmark'],['Horizontal lockup','logos','SVG','logos/lockup-horizontal.svg','BIG CRUISE horizontal lockup'],['Stacked lockup','logos','SVG','logos/lockup-stacked.svg','BIG CRUISE stacked lockup'],['BC〽️ app icon','icons','PNG','logos/app-icon.png','BC〽️ app icon'],['Standalone signal mark','marks','SVG','logos/mark.svg','Standalone 〽️ signal mark'],['Signal badge','marks','PNG','logos/live-mark.png','Standalone signal badge'],['Midnight mark','marks','SVG','logos/midnight-mark.svg','Midnight signal mark'],['7 Days Monday','7-days','JPG','days/mon.jpg','Monday theme artwork'],['7 Days Tuesday','7-days','JPG','days/tue.jpg','Tuesday theme artwork'],['7 Days Wednesday','7-days','JPG','days/wed.jpg','Wednesday theme artwork'],['7 Days Thursday','7-days','JPG','days/thu.jpg','Thursday theme artwork'],['7 Days Friday','7-days','JPG','days/fri.jpg','Friday theme artwork'],['7 Days Saturday','7-days','JPG','days/sat.jpg','Saturday theme artwork'],['7 Days Sunday','7-days','JPG','days/sun.jpg','Sunday theme artwork']
-];
-const $=id=>document.getElementById(id);
-const assetCard=([name,category,format,path,alt])=>`<article class="asset-card"><div class="asset-preview"><img src="${path}" alt="${alt}" loading="lazy" /></div><div class="asset-meta"><div><strong>${name}</strong><small>/${category} · ${format}</small></div><a class="button" href="${path}" download>Download</a></div></article>`;
-$('logo-grid').innerHTML=assets.slice(0,6).map(assetCard).join('');
-$('asset-grid').innerHTML=assets.map(assetCard).join('');
-const today=new Date().getDay();let active=today===0?6:today-1;
-function setTheme(index){const theme=themes[index];active=index;document.documentElement.style.setProperty('--bc-accent',theme.accent);document.documentElement.style.setProperty('--bc-glow',`${theme.accent}44`);$('theme-day').textContent=theme.day;$('theme-name').textContent=theme.name;$('theme-copy').textContent=theme.copy;$('theme-accent').textContent=theme.accent;$('theme-motif').textContent=theme.motif;$('theme-motion').textContent=theme.motion;$('theme-art').src=theme.art;$('theme-art').alt=`${theme.name} theme artwork`;document.querySelectorAll('[data-theme]').forEach(button=>button.setAttribute('aria-pressed',String(Number(button.dataset.theme)===index)));document.body.dataset.motion=theme.motion}
-$('day-controls').innerHTML=themes.map((theme,index)=>`<button type="button" data-theme="${index}" aria-pressed="false">${theme.day.split(' / ')[0]}</button>`).join('');document.querySelectorAll('[data-theme]').forEach(button=>button.addEventListener('click',()=>setTheme(Number(button.dataset.theme))));setTheme(active);
+
+const todayIndex = () => (new Date().getDay() + 6) % 7;
+const contrast = (hex) => hex === '#F7F3E8' ? CORE.background : CORE.text;
+
+function createController() {
+  const section = document.querySelector('#days');
+  if (!section) return null;
+  const panel = document.createElement('div');
+  panel.className = 'theme-controller';
+  panel.innerHTML = `<div><span class="eyebrow">Theme engine</span><strong id="theme-status">TODAY / ${DAYS[todayIndex()].name}</strong></div><div class="theme-mode" role="group" aria-label="7 Days preview mode"><button type="button" data-theme-auto aria-pressed="true">AUTO / TODAY</button>${DAYS.map((theme, index) => `<button type="button" data-theme-index="${index}" aria-pressed="false">${theme.day}</button>`).join('')}</div>`;
+  section.querySelector('.wrap').insertBefore(panel, section.querySelector('.days'));
+  return panel;
+}
+
+function applyTheme(theme, index, mode, panel) {
+  const root = document.documentElement;
+  root.dataset.theme = theme.day.toLowerCase();
+  root.dataset.motion = theme.motionPreset;
+  root.style.setProperty('--bc-primary', CORE.primary);
+  root.style.setProperty('--bc-background', CORE.background);
+  root.style.setProperty('--bc-surface', CORE.surface);
+  root.style.setProperty('--bc-surface-2', CORE.surface2);
+  root.style.setProperty('--bc-text', CORE.text);
+  root.style.setProperty('--bc-muted', CORE.muted);
+  root.style.setProperty('--bc-accent', theme.accent);
+  root.style.setProperty('--bc-accent-secondary', theme.secondaryAccent);
+  root.style.setProperty('--bc-border', `${theme.accent}66`);
+  root.style.setProperty('--bc-glow', `${theme.accent}44`);
+  root.style.setProperty('--bc-accent-contrast', contrast(theme.accent));
+  panel.querySelector('#theme-status').textContent = `${mode === 'auto' ? 'TODAY' : 'PREVIEW'} / ${theme.day} — ${theme.name}`;
+  panel.querySelector('[data-theme-auto]').setAttribute('aria-pressed', String(mode === 'auto'));
+  panel.querySelectorAll('[data-theme-index]').forEach((button) => button.setAttribute('aria-pressed', String(mode === 'manual' && Number(button.dataset.themeIndex) === index)));
+  document.querySelectorAll('.day-card').forEach((card, cardIndex) => {
+    card.dataset.active = String(cardIndex === index);
+    card.style.setProperty('--day-accent', DAYS[cardIndex].accent);
+  });
+}
+
+function init() {
+  const panel = createController();
+  if (!panel) return;
+  let mode = 'auto';
+  let index = todayIndex();
+  applyTheme(DAYS[index], index, mode, panel);
+  panel.addEventListener('click', (event) => {
+    const button = event.target.closest('button');
+    if (!button) return;
+    if (button.hasAttribute('data-theme-auto')) { mode = 'auto'; index = todayIndex(); }
+    else { mode = 'manual'; index = Number(button.dataset.themeIndex); }
+    applyTheme(DAYS[index], index, mode, panel);
+  });
+}
+
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+else init();
