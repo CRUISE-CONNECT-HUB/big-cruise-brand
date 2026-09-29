@@ -1,66 +1,65 @@
-const CORE = { primary: '#F5C400', background: '#0B0B0B', surface: '#171717', surface2: '#252525', text: '#F7F3E8', muted: '#C9C3B5' };
-
-export const DAYS = [
-  { day: 'Monday', name: 'DOMINION STATE', accent: '#6D28D9', secondaryAccent: '#F5C400', motif: 'crown / stamp', mood: 'Power, ownership, arrival.', energy: 'Commanding', description: 'Own the room. Enter like the timeline owes you rent.', motionPreset: 'stamp' },
-  { day: 'Tuesday', name: 'NO FILTER ENERGY', accent: '#FF3B30', secondaryAccent: '#F5C400', motif: 'receipt / strike', mood: 'Uncensored, raw, loud.', energy: 'Unfiltered', description: 'Say it with your chest. The internet has receipts.', motionPreset: 'strike' },
-  { day: 'Wednesday', name: 'SHE MOVES DIFFERENT', accent: '#FF4FD8', secondaryAccent: '#F7F3E8', motif: 'motion ribbons', mood: 'Feminine power, elegance, motion.', energy: 'Fluid', description: 'She does not chase the moment. She becomes it.', motionPreset: 'ribbon' },
-  { day: 'Thursday', name: 'ECHO ERA', accent: '#2F80ED', secondaryAccent: '#F5C400', motif: 'echo trails', mood: 'Sound, influence, repetition, virality.', energy: 'Amplified', description: 'One post. Ten thousand echoes.', motionPreset: 'echo' },
-  { day: 'Friday', name: 'PLAY YOUR VIBE', accent: '#22C55E', secondaryAccent: '#F5C400', motif: 'score strips', mood: 'Games, expression, community competition.', energy: 'Playful', description: 'Pick your vibe. Play like you have receipts.', motionPreset: 'bounce' },
-  { day: 'Saturday', name: 'READ BETWEEN THE LINES', accent: '#F7F3E8', secondaryAccent: '#F5C400', motif: 'redaction bars', mood: 'Subtext, screenshots, quotes, hidden meaning.', energy: 'Observant', description: 'The text said one thing. The vibe said another.', motionPreset: 'wipe' },
-  { day: 'Sunday', name: 'CHAOS CULTURE', accent: '#FF7A00', secondaryAccent: '#F5C400', motif: 'offset badge / chaos marks', mood: 'Final boss energy, full community madness.', energy: 'Uncontainable', description: 'Controlled chaos. Unfiltered culture. BIG CRUISE〽️', motionPreset: 'shake' }
-];
-
-const todayIndex = () => (new Date().getDay() + 6) % 7;
-const contrast = (hex) => hex === '#F7F3E8' ? CORE.background : CORE.text;
-
-function createController() {
-  const section = document.querySelector('#days');
-  if (!section) return null;
-  const panel = document.createElement('div');
-  panel.className = 'theme-controller';
-  panel.innerHTML = `<div><span class="eyebrow">Theme engine</span><strong id="theme-status">TODAY / ${DAYS[todayIndex()].name}</strong></div><div class="theme-mode" role="group" aria-label="7 Days preview mode"><button type="button" data-theme-auto aria-pressed="true">AUTO / TODAY</button>${DAYS.map((theme, index) => `<button type="button" data-theme-index="${index}" aria-pressed="false">${theme.day}</button>`).join('')}</div>`;
-  section.querySelector('.wrap').insertBefore(panel, section.querySelector('.days'));
-  return panel;
+const CORE={primary:'#F5C400',background:'#0B0B0B',surface:'#171717',surface2:'#252525',text:'#F7F3E8',muted:'#C9C3B5'};
+const ASSETS=[
+{id:'primary-logo',name:'Primary Logo',category:'Logos',url:'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Image-BF3B8FEC-QRS1uam1uAkRTCgXjKZmotuYLvgDVN.jpeg',description:'BIG CRUISE〽️ primary mark.'},
+{id:'bc-icon',name:'BC〽️ Icon',category:'Logos',url:'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Image-F4FCC712-IcXUzUINeSrwdMl4BFBhFzZXJ2JnEk.jpeg',description:'Secondary BIG CRUISE icon.'},
+{id:'signal-mark',name:'Signal Mark',category:'Logos',url:'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Image-01676877-kE2u7UumPixJ6rHVhMZyW0cp63d9mL.jpeg',description:'Standalone yellow 〽️ signal.'},
+{id:'signal-badge',name:'Signal Badge',category:'Logos',url:'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Image-8085DBD1-1hzguCFEk7c3j8RQr1yHGUefgNPdlh.jpeg',description:'Standalone 〽️ badge.'},
+{id:'danfo-motion',name:'Danfo Motion Graphic',category:'Graphics',url:'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Image-1DED8E1A-uwiz4HTYgLEzIRsoLq15ChNvBcn8vX.jpeg',description:'Danfo-inspired speed graphic.'}];
+export const DAYS=[
+{day:'Monday',name:'DOMINION STATE',accent:'#6D28D9',secondaryAccent:'#F5C400',motif:'crown / stamp',mood:'Power, ownership, arrival.',energy:'Commanding',description:'Own the room. Enter like the timeline owes you rent.',motionPreset:'stamp',pattern:'crown'},
+{day:'Tuesday',name:'NO FILTER ENERGY',accent:'#FF3B30',secondaryAccent:'#F5C400',motif:'receipt / strike',mood:'Uncensored, raw, loud.',energy:'Unfiltered',description:'Say it with your chest. The internet has receipts.',motionPreset:'strike',pattern:'receipt'},
+{day:'Wednesday',name:'SHE MOVES DIFFERENT',accent:'#FF4FD8',secondaryAccent:'#F7F3E8',motif:'motion ribbons',mood:'Feminine power, elegance, motion.',energy:'Fluid',description:'She does not chase the moment. She becomes it.',motionPreset:'ribbon',pattern:'ribbon'},
+{day:'Thursday',name:'ECHO ERA',accent:'#2F80ED',secondaryAccent:'#F5C400',motif:'echo trails',mood:'Sound, influence, repetition, virality.',energy:'Amplified',description:'One post. Ten thousand echoes.',motionPreset:'echo',pattern:'echo'},
+{day:'Friday',name:'PLAY YOUR VIBE',accent:'#22C55E',secondaryAccent:'#F5C400',motif:'score strips',mood:'Games, expression, community competition.',energy:'Playful',description:'Pick your vibe. Play like you have receipts.',motionPreset:'bounce',pattern:'score'},
+{day:'Saturday',name:'READ BETWEEN THE LINES',accent:'#F7F3E8',secondaryAccent:'#F5C400',motif:'redaction bars',mood:'Subtext, screenshots, quotes, hidden meaning.',energy:'Observant',description:'The text said one thing. The vibe said another.',motionPreset:'wipe',pattern:'redaction'},
+{day:'Sunday',name:'CHAOS CULTURE',accent:'#FF7A00',secondaryAccent:'#F5C400',motif:'offset badge / chaos marks',mood:'Final boss energy, full community madness.',energy:'Uncontainable',description:'Controlled chaos. Unfiltered culture. BIG CRUISE〽️',motionPreset:'shake',pattern:'chaos'}];
+const PATTERNS={
+crown:'radial-gradient(circle at 18% 18%,color-mix(in srgb,var(--bc-accent) 20%,transparent) 0 2px,transparent 3px),linear-gradient(135deg,transparent 0 44%,color-mix(in srgb,var(--bc-accent) 16%,transparent) 45% 47%,transparent 48% 100%),linear-gradient(45deg,transparent 0 44%,color-mix(in srgb,var(--bc-accent) 10%,transparent) 45% 47%,transparent 48% 100%)',
+receipt:'repeating-linear-gradient(0deg,transparent 0 17px,color-mix(in srgb,var(--bc-accent) 13%,transparent) 18px 19px),repeating-linear-gradient(90deg,transparent 0 71px,color-mix(in srgb,var(--bc-accent) 8%,transparent) 72px 73px)',
+ribbon:'repeating-linear-gradient(155deg,transparent 0 30px,color-mix(in srgb,var(--bc-accent) 15%,transparent) 31px 34px,transparent 35px 58px)',
+echo:'radial-gradient(circle at 78% 24%,transparent 0 26px,color-mix(in srgb,var(--bc-accent) 17%,transparent) 27px 29px,transparent 30px 54px,color-mix(in srgb,var(--bc-accent) 10%,transparent) 55px 57px,transparent 58px 90px)',
+score:'repeating-linear-gradient(90deg,color-mix(in srgb,var(--bc-accent) 13%,transparent) 0 5px,transparent 5px 22px),repeating-linear-gradient(0deg,transparent 0 32px,color-mix(in srgb,var(--bc-accent) 8%,transparent) 33px 35px)',
+redaction:'repeating-linear-gradient(0deg,transparent 0 26px,color-mix(in srgb,var(--bc-accent) 14%,transparent) 27px 31px),linear-gradient(90deg,transparent 0 18%,color-mix(in srgb,var(--bc-accent) 9%,transparent) 18% 24%,transparent 24% 63%,color-mix(in srgb,var(--bc-accent) 9%,transparent) 63% 69%,transparent 69%)',
+chaos:'linear-gradient(17deg,transparent 0 31%,color-mix(in srgb,var(--bc-accent) 13%,transparent) 32% 36%,transparent 37% 100%),linear-gradient(-11deg,transparent 0 58%,color-mix(in srgb,var(--bc-accent) 10%,transparent) 59% 64%,transparent 65% 100%)'};
+const todayIndex=()=> (new Date().getDay()+6)%7;
+const contrast=hex=>hex==='#F7F3E8'?CORE.background:CORE.text;
+function injectBrandSystem(){
+ if(document.querySelector('#brand-system-generated'))return;
+ const section=document.createElement('section');section.id='brand-system-generated';section.className='section generated-system';
+ section.innerHTML=`<div class="wrap">
+ <div class="section-intro"><p class="eyebrow">06 / Reusable brand infrastructure</p><h2>One engine. Everything moves.</h2><p>The active 7 Days theme is shared across patterns, assets, motion, templates and future BIG CRUISE products.</p></div>
+ <div id="asset-library" class="system-block"><div class="system-heading"><span class="label">Asset library</span><span class="muted">Verified registry / supplied assets</span></div><div class="asset-grid">${ASSETS.map(a=>`<article class="asset-card"><div class="asset-preview"><img src="${a.url}" alt="${a.name}" loading="lazy"></div><div class="asset-meta"><strong>${a.name}</strong><span class="chip">${a.category}</span><p>${a.description}</p><a class="button ghost small" href="${a.url}" target="_blank" rel="noreferrer">Open asset</a></div></article>`).join('')}</div></div>
+ <div class="system-block"><div class="system-heading"><span class="label">Daily pattern system</span><span class="muted">Reusable CSS pattern / active theme</span></div><div class="pattern-showcase"><div class="pattern-swatch"><span>ACTIVE PATTERN</span><strong id="pattern-name">DOMINION STATE</strong></div><div class="pattern-controls"><label>Intensity <input id="pattern-intensity" type="range" min="4" max="28" value="14" aria-label="Pattern intensity"></label><p class="muted">Reusable on pages, cards, social artwork, games, music and merch.</p></div></div></div>
+ <div class="system-block"><div class="system-heading"><span class="label">Motion system</span><span class="muted">Theme-aware / reduced-motion safe</span></div><div class="motion-grid">${DAYS.map(d=>`<div class="motion-card" data-motion-card="${d.motionPreset}" style="--motion-accent:${d.accent}"><span>${d.day}</span><strong>${d.motif}</strong><i></i></div>`).join('')}</div></div>
+ <div id="brand-kits" class="system-block"><div class="system-heading"><span class="label">Brand kits</span><span class="muted">Shared theme + asset infrastructure</span></div><div class="kit-grid"><article class="kit-card"><span>HQ</span><strong>BIG CRUISE HQ〽️</strong><p>App/UI, games, community, profile and challenges.</p></article><article class="kit-card"><span>GAMES</span><strong>BIG CRUISE GAMES〽️</strong><p>Game cards, badges, states, winners and multiplayer signals.</p></article><article class="kit-card"><span>COMMUNITY</span><strong>BIG CRUISE COMMUNITY〽️</strong><p>Weekly themes, challenges, announcements and member visuals.</p></article><article class="kit-card"><span>CONTROL</span><strong>BIG CRUISE CONTROL🎵〽️</strong><p>Playlist, track cards, DJ and music promotion visuals.</p></article></div></div>
+ <div id="social-templates" class="system-block"><div class="system-heading"><span class="label">Social template engine</span><span class="muted">Automatically inherits the active day</span></div><div class="social-grid"><article class="social-card"><span class="label">X / Announcement</span><strong>BIG CRUISE〽️ HAS ENTERED THE CHAT.</strong><small>Theme-aware background + pattern</small></article><article class="social-card"><span class="label">Challenge</span><strong>DROP YOUR WILDEST REPLY.</strong><small>BEST ONE WINS.</small></article><article class="social-card"><span class="label">Game</span><strong>PLAY YOUR VIBE〽️</strong><small>ROOM OPEN / MULTIPLAYER READY</small></article><article class="social-card"><span class="label">Control</span><strong>NOW SPINNING 🎵〽️</strong><small>BIG CRUISE CONTROL</small></article></div></div>
+ <div id="merch" class="system-block"><div class="system-heading"><span class="label">Merch-ready artwork</span><span class="muted">Artwork system only / no checkout</span></div><div class="merch-grid"><div class="merch-card"><span>TEE</span><strong>DAY SIGNAL</strong><i></i></div><div class="merch-card"><span>HOODIE</span><strong>CRUISE SIGNAL</strong><i></i></div><div class="merch-card"><span>STICKER</span><strong>〽️ / DAY SIGNAL</strong><i></i></div><div class="merch-card"><span>PATCH</span><strong>BC〽️</strong><i></i></div></div></div>
+ </div>`;
+ document.querySelector('#enter')?.parentElement.before(section);
 }
-
-function applyTheme(theme, index, mode, panel) {
-  const root = document.documentElement;
-  root.dataset.theme = theme.day.toLowerCase();
-  root.dataset.motion = theme.motionPreset;
-  root.style.setProperty('--bc-primary', CORE.primary);
-  root.style.setProperty('--bc-background', CORE.background);
-  root.style.setProperty('--bc-surface', CORE.surface);
-  root.style.setProperty('--bc-surface-2', CORE.surface2);
-  root.style.setProperty('--bc-text', CORE.text);
-  root.style.setProperty('--bc-muted', CORE.muted);
-  root.style.setProperty('--bc-accent', theme.accent);
-  root.style.setProperty('--bc-accent-secondary', theme.secondaryAccent);
-  root.style.setProperty('--bc-border', `${theme.accent}66`);
-  root.style.setProperty('--bc-glow', `${theme.accent}44`);
-  root.style.setProperty('--bc-accent-contrast', contrast(theme.accent));
-  panel.querySelector('#theme-status').textContent = `${mode === 'auto' ? 'TODAY' : 'PREVIEW'} / ${theme.day} — ${theme.name}`;
-  panel.querySelector('[data-theme-auto]').setAttribute('aria-pressed', String(mode === 'auto'));
-  panel.querySelectorAll('[data-theme-index]').forEach((button) => button.setAttribute('aria-pressed', String(mode === 'manual' && Number(button.dataset.themeIndex) === index)));
-  document.querySelectorAll('.day-card').forEach((card, cardIndex) => {
-    card.dataset.active = String(cardIndex === index);
-    card.style.setProperty('--day-accent', DAYS[cardIndex].accent);
-  });
+function createController(){
+ const section=document.querySelector('#days');if(!section)return null;
+ const panel=document.createElement('div');panel.className='theme-controller';
+ panel.innerHTML=`<div><span class="eyebrow">Theme engine</span><strong id="theme-status">TODAY / ${DAYS[todayIndex()].name}</strong><span id="theme-description" class="muted"></span></div><div class="theme-mode" role="group" aria-label="7 Days preview mode"><button type="button" data-theme-auto aria-pressed="true">AUTO / TODAY</button>${DAYS.map((t,i)=>`<button type="button" data-theme-index="${i}" aria-pressed="false">${t.day}</button>`).join('')}</div>`;
+ section.querySelector('.wrap').insertBefore(panel,section.querySelector('.days'));return panel;
 }
-
-function init() {
-  const panel = createController();
-  if (!panel) return;
-  let mode = 'auto';
-  let index = todayIndex();
-  applyTheme(DAYS[index], index, mode, panel);
-  panel.addEventListener('click', (event) => {
-    const button = event.target.closest('button');
-    if (!button) return;
-    if (button.hasAttribute('data-theme-auto')) { mode = 'auto'; index = todayIndex(); }
-    else { mode = 'manual'; index = Number(button.dataset.themeIndex); }
-    applyTheme(DAYS[index], index, mode, panel);
-  });
+function applyTheme(theme,index,mode,panel){
+ const root=document.documentElement;root.dataset.theme=theme.day.toLowerCase();root.dataset.motion=theme.motionPreset;
+ [['--bc-primary',CORE.primary],['--bc-background',CORE.background],['--bc-surface',CORE.surface],['--bc-surface-2',CORE.surface2],['--bc-text',CORE.text],['--bc-muted',CORE.muted],['--bc-accent',theme.accent],['--bc-accent-secondary',theme.secondaryAccent],['--bc-border',theme.accent+'66'],['--bc-glow',theme.accent+'44'],['--bc-accent-contrast',contrast(theme.accent)],['--bc-pattern',PATTERNS[theme.pattern]]].forEach(([k,v])=>root.style.setProperty(k,v));
+ if(!root.style.getPropertyValue('--bc-pattern-opacity'))root.style.setProperty('--bc-pattern-opacity','.14');
+ document.querySelector('meta[name="theme-color"]')?.setAttribute('content',theme.accent);
+ panel.querySelector('#theme-status').textContent=`${mode==='auto'?'TODAY':'PREVIEW'} / ${theme.day} — ${theme.name}`;
+ panel.querySelector('#theme-description').textContent=`${theme.mood} • ${theme.energy}`;
+ panel.querySelector('[data-theme-auto]').setAttribute('aria-pressed',String(mode==='auto'));
+ panel.querySelectorAll('[data-theme-index]').forEach(b=>b.setAttribute('aria-pressed',String(mode==='manual'&&Number(b.dataset.themeIndex)===index)));
+ document.querySelectorAll('.day-card').forEach((c,i)=>{c.dataset.active=String(i===index);c.style.setProperty('--day-accent',DAYS[i].accent)});
+ document.querySelectorAll('.social-card,.kit-card,.merch-card').forEach(el=>el.dataset.theme=theme.day.toLowerCase());
+ const pn=document.querySelector('#pattern-name');if(pn)pn.textContent=theme.name;
 }
-
-if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
-else init();
+function init(){
+ injectBrandSystem();const panel=createController();if(!panel)return;let mode='auto',index=todayIndex();
+ const intensity=document.querySelector('#pattern-intensity');if(intensity)intensity.addEventListener('input',e=>document.documentElement.style.setProperty('--bc-pattern-opacity',String(Number(e.target.value)/100)));
+ applyTheme(DAYS[index],index,mode,panel);
+ panel.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.hasAttribute('data-theme-auto')){mode='auto';index=todayIndex()}else{mode='manual';index=Number(b.dataset.themeIndex)}applyTheme(DAYS[index],index,mode,panel)});
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
