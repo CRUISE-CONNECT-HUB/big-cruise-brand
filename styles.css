@@ -94,27 +94,3 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
 @keyframes bc-existing-danfo{45%{transform:translateX(-7px) skewX(-2deg)}}
 @keyframes bc-existing-streak{0%{transform:translateX(70px);opacity:0}35%{opacity:.8}100%{transform:translateX(-120px);opacity:0}}
 @media (prefers-reduced-motion:reduce){.bc-mark-primary img,.bc-mark-secondary img,.bc-mark-danfo img,.bc-mark-primary::after,.bc-mark-secondary::after,.bc-mark-danfo::after{animation:none!important}}
-
-/* EXTRACTED ASSET MOTION LAB */
-.extracted-motion-grid{display:grid;gap:14px}
-.extracted-motion-card{position:relative;min-height:250px;padding:16px;border:1px solid color-mix(in srgb,var(--bc-accent,#f5c400) 28%,#333);background:#0d0d0d;border-radius:20px;overflow:hidden}
-.extracted-stage{position:relative;min-height:190px;display:grid;place-items:center;overflow:hidden}
-.extracted-stage img{position:relative;z-index:3;max-width:82%;max-height:130px;object-fit:contain}
-.asset-wordmark-motion{animation:bc-wordmark-slide 4s cubic-bezier(.22,.75,.25,1) infinite}
-.asset-signal-motion{width:110px;filter:drop-shadow(0 10px 24px color-mix(in srgb,var(--bc-accent,#f5c400) 35%,transparent));animation:bc-signal-float 2.6s ease-in-out infinite}
-.motion-sweep{position:absolute;z-index:1;width:72%;height:7px;right:-80%;top:52%;border-radius:99px;background:var(--bc-accent,#f5c400);box-shadow:-34px 18px 0 color-mix(in srgb,var(--bc-accent,#f5c400) 58%,transparent),-68px 36px 0 color-mix(in srgb,var(--bc-accent,#f5c400) 28%,transparent);animation:bc-sweep 1.7s linear infinite}
-.signal-pulse{position:absolute;width:140px;height:140px;border:2px solid var(--bc-accent,#f5c400);border-radius:50%;opacity:0;animation:bc-signal-ring 2.6s ease-out infinite}
-.signal-trail{position:absolute;width:45%;height:5px;right:-55%;top:55%;border-radius:99px;background:var(--bc-accent,#f5c400);opacity:.65;animation:bc-sweep 1.25s linear infinite}
-.danfo-stage{background:linear-gradient(90deg,transparent 0 12%,rgba(245,196,0,.05) 35%,transparent 72%)}
-.asset-danfo-motion{width:100%;max-width:760px;animation:bc-danfo-extracted 2.35s cubic-bezier(.2,.8,.2,1) infinite}
-@keyframes bc-wordmark-slide{0%,100%{transform:translateX(-9px);filter:drop-shadow(0 8px 10px rgba(0,0,0,.25))}50%{transform:translateX(9px);filter:drop-shadow(0 13px 24px color-mix(in srgb,var(--bc-accent,#f5c400) 18%,transparent))}}
-@keyframes bc-signal-float{0%,100%{transform:translateY(5px) rotate(-2deg) scale(.97)}50%{transform:translateY(-7px) rotate(2deg) scale(1.05)}}
-@keyframes bc-sweep{0%{transform:translateX(0);opacity:0}18%{opacity:.9}100%{transform:translateX(-260%);opacity:0}}
-@keyframes bc-signal-ring{0%{transform:scale(.55);opacity:.55}100%{transform:scale(1.55);opacity:0}}
-@keyframes bc-danfo-extracted{0%,100%{transform:translateX(12px)}42%{transform:translateX(-10px) skewX(-1deg)}70%{transform:translateX(3px)}}
-.big-cruise-id-block{background:linear-gradient(135deg,#0b0b0b,#141414);border-color:#f5c40055}
-.id-preview{padding:10px;border-radius:22px;background:#070707;overflow:hidden}
-.id-preview img{display:block;width:100%;height:auto;border-radius:16px}
-.id-controls{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-@media (min-width:700px){.extracted-motion-grid{grid-template-columns:repeat(3,1fr)}}
-@media (prefers-reduced-motion:reduce){.asset-wordmark-motion,.asset-signal-motion,.motion-sweep,.signal-pulse,.signal-trail,.asset-danfo-motion{animation:none!important}}
