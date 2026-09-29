@@ -79,3 +79,18 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
 @media (min-width:700px){.artwork-grid{grid-template-columns:repeat(2,1fr)}.animated-marks{grid-template-columns:repeat(3,1fr)}}
 @media (min-width:1050px){.artwork-grid{grid-template-columns:repeat(3,1fr)}}
 @media (prefers-reduced-motion:reduce){body::after{transition:none}.artwork-card:hover,.artwork-card:hover .artwork-preview img{transform:none}.animated-mark-stage img,.animated-mark-stage i{animation:none!important}}
+
+/* Existing logo family motion: subtle enough for navigation, visible enough for hero/cards */
+.bc-mark-primary,.bc-mark-secondary,.bc-mark-danfo{position:relative;isolation:isolate}
+.bc-mark-primary::after,.bc-mark-secondary::after,.bc-mark-danfo::after{content:"";position:absolute;z-index:0;right:-12%;top:50%;width:46%;height:5px;border-radius:99px;background:var(--bc-accent,var(--yellow));box-shadow:-24px 14px 0 color-mix(in srgb,var(--bc-accent,var(--yellow)) 55%,transparent),-48px 28px 0 color-mix(in srgb,var(--bc-accent,var(--yellow)) 25%,transparent);opacity:.55;pointer-events:none}
+.bc-mark-primary img{position:relative;z-index:1;animation:bc-existing-primary 3.4s ease-in-out infinite}
+.bc-mark-secondary img{position:relative;z-index:1;animation:bc-existing-secondary 2.8s ease-in-out infinite}
+.bc-mark-danfo img{position:relative;z-index:1;animation:bc-existing-danfo 2.2s cubic-bezier(.2,.8,.25,1) infinite}
+.bc-mark-primary::after{animation:bc-existing-streak 1.8s linear infinite}
+.bc-mark-secondary::after{animation:bc-existing-streak 1.5s linear infinite reverse}
+.bc-mark-danfo::after{animation:bc-existing-streak .95s linear infinite}
+@keyframes bc-existing-primary{50%{transform:translateX(8px) scale(1.015);filter:drop-shadow(0 16px 28px color-mix(in srgb,var(--bc-accent,var(--yellow)) 28%,transparent))}}
+@keyframes bc-existing-secondary{50%{transform:translateY(-4px) rotate(2deg) scale(1.035)}}
+@keyframes bc-existing-danfo{45%{transform:translateX(-7px) skewX(-2deg)}}
+@keyframes bc-existing-streak{0%{transform:translateX(70px);opacity:0}35%{opacity:.8}100%{transform:translateX(-120px);opacity:0}}
+@media (prefers-reduced-motion:reduce){.bc-mark-primary img,.bc-mark-secondary img,.bc-mark-danfo img,.bc-mark-primary::after,.bc-mark-secondary::after,.bc-mark-danfo::after{animation:none!important}}
