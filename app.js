@@ -49,7 +49,7 @@ function createController(){
 }
 function animateBrandMarks(){document.querySelectorAll('.nav img,.logo-card img,.hero-mark img,.motion img').forEach(img=>{const alt=(img.alt||'').toLowerCase();const holder=img.closest('.logo-card,.hero-mark,.motion,.nav');if(!holder)return;holder.classList.remove('bc-mark-primary','bc-mark-secondary','bc-mark-danfo');if(alt.includes('primary logo'))holder.classList.add('bc-mark-primary');else if(alt.includes('secondary')||alt.includes('bc icon'))holder.classList.add('bc-mark-secondary');else if(alt.includes('danfo'))holder.classList.add('bc-mark-danfo')})}
 function applyTheme(theme,index,mode,panel){
- const root=document.documentElement;root.dataset.theme=theme.day.toLowerCase();root.dataset.motion=theme.motionPreset;
+ const root=document.documentElement;root.dataset.theme=theme.day.toLowerCase();root.dataset.motion=theme.motionPreset;root.style.setProperty('--bc-artwork','url(' + ARTWORKS[theme.day] + ')');
  [['--bc-primary',CORE.primary],['--bc-background',CORE.background],['--bc-surface',CORE.surface],['--bc-surface-2',CORE.surface2],['--bc-text',CORE.text],['--bc-muted',CORE.muted],['--bc-accent',theme.accent],['--bc-accent-secondary',theme.secondaryAccent],['--bc-border',theme.accent+'66'],['--bc-glow',theme.accent+'44'],['--bc-accent-contrast',contrast(theme.accent)],['--bc-pattern',PATTERNS[theme.pattern]]].forEach(([k,v])=>root.style.setProperty(k,v));
  if(!root.style.getPropertyValue('--bc-pattern-opacity'))root.style.setProperty('--bc-pattern-opacity','.14');
  document.querySelector('meta[name="theme-color"]')?.setAttribute('content',theme.accent);
